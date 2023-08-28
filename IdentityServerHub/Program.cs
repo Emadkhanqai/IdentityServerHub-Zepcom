@@ -2,9 +2,6 @@ using System.Reflection;
 using IdentityServer4.EntityFramework.Mappers;
 using IdentityServerHub.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System.Linq;
 
 namespace IdentityServerHub
 {
@@ -52,15 +49,12 @@ namespace IdentityServerHub
                 }
                 configurationContext.SaveChanges();
             }
-
         }
-
 
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Access the configuration
             var configuration = builder.Configuration;
             string connectionString = configuration.GetConnectionString("IdentityHub");
 
@@ -90,6 +84,7 @@ namespace IdentityServerHub
 
             var app = builder.Build();
 
+            // Seed the database
             InitializeDatabase(app.Services.GetService<IHost>());
 
             // Configure the HTTP request pipeline.
@@ -105,8 +100,7 @@ namespace IdentityServerHub
             app.UseRouting();
             app.UseIdentityServer();
             app.UseAuthorization();
-            app.MapDefaultControllerRoute(); // This will map the default route for controllers.
-
+            app.MapDefaultControllerRoute(); 
             app.MapRazorPages();
 
             app.Run();

@@ -40,7 +40,6 @@ namespace Zepcom.Winforms
                     return;
                 }
 
-                // Token is valid. Store token and/or use it to make authorized requests
                 var token = tokenResponse.AccessToken;
                 MessageBox.Show(token is not null ? "Token Validated" : "Error occurred");
             }
@@ -51,9 +50,10 @@ namespace Zepcom.Winforms
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            AuthenticateAsync().GetAwaiter().GetResult();
+            await AuthenticateAsync();
         }
+
     }
 }

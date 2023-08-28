@@ -25,8 +25,8 @@ namespace Zepcom.API
                         ValidateIssuerSigningKey = true,
                         ValidateIssuer = true,
                         ValidateAudience = true,
-                        ValidIssuer = "https://localhost:7114",  // Ensure this is correct
-                        ValidAudience = "api1"  // Ensure this is correct
+                        ValidIssuer = "https://localhost:7114",  
+                        ValidAudience = "api1"  
                     };
                 });
 
