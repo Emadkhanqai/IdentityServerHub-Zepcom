@@ -6,6 +6,15 @@ namespace IdentityServerHub
 {
     public static class Config
     {
+        //Hub
+        //    https://localhost:7114
+
+        //API
+        //    https://localhost:7263
+
+        //MVC
+        //    https://localhost:7087
+
         public static IEnumerable<IdentityResource> IdentityResources =>
             new IdentityResource[]
             {
