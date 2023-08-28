@@ -38,7 +38,12 @@ namespace IdentityServerHub
                     ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Code,
                     RedirectUris = { "https://localhost:7087/signin-oidc" },
-                    AllowedScopes = { "openid", "profile", "api1" }
+                    AllowedScopes =
+                    {
+                        IdentityServer4.IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServer4.IdentityServerConstants.StandardScopes.Profile,
+                        "api1"
+                    }
                 },
 
                 // Desktop client
@@ -47,7 +52,12 @@ namespace IdentityServerHub
                     ClientId = "desktop",
                     ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-                    AllowedScopes = { "openid", "profile", "api1" }
+                    AllowedScopes =
+                    {
+                        IdentityServer4.IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServer4.IdentityServerConstants.StandardScopes.Profile,
+                        "api1"
+                    }
                 },
 
                 // API client

@@ -1,3 +1,6 @@
+using Microsoft.IdentityModel.Tokens; // Required for TokenValidationParameters
+using Microsoft.AspNetCore.Authentication.JwtBearer; // Required for JwtBearerDefaults
+
 namespace Zepcom.API
 {
     public class Program
@@ -7,9 +10,17 @@ namespace Zepcom.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            // Adding authentication with JWT Bearer tokens
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = "https://localhost:7114"; 
+                    options.RequireHttpsMetadata = false; 
+                    options.Audience = "api1"; 
+                });
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -24,8 +35,11 @@ namespace Zepcom.API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseRouting();
 
+            // Add these before UseAuthorization
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
 
