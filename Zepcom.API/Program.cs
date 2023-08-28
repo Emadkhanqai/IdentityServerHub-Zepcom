@@ -16,10 +16,20 @@ namespace Zepcom.API
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    options.Authority = "https://localhost:7114"; 
-                    options.RequireHttpsMetadata = false; 
-                    options.Audience = "api1"; 
+                    options.Authority = "https://localhost:7114";
+                    options.RequireHttpsMetadata = false;
+                    options.Audience = "api1";
+
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidIssuer = "https://localhost:7114",  // Ensure this is correct
+                        ValidAudience = "api1"  // Ensure this is correct
+                    };
                 });
+
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -37,7 +47,6 @@ namespace Zepcom.API
 
             app.UseRouting();
 
-            // Add these before UseAuthorization
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -43,6 +43,16 @@ namespace IdentityServerHub
                 }
                 configurationContext.SaveChanges();
             }
+
+            if (!configurationContext.ApiResources.Any())
+            {
+                foreach (var resource in Config.ApiResources)
+                {
+                    configurationContext.ApiResources.Add(resource.ToEntity());
+                }
+                configurationContext.SaveChanges();
+            }
+
         }
 
 

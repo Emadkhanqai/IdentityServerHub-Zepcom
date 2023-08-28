@@ -15,6 +15,15 @@ namespace IdentityServerHub
         //MVC
         //    https://localhost:7087
 
+        public static IEnumerable<ApiResource> ApiResources =>
+            new ApiResource[]
+            {
+                new ApiResource("api1", "My API")
+                {
+                    Scopes = { "api1" }
+                }
+            };
+
         public static IEnumerable<IdentityResource> IdentityResources =>
             new IdentityResource[]
             {
